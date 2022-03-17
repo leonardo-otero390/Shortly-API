@@ -1,4 +1,5 @@
-import { connection } from "../database.js";
+import * as authRepository from "../repositories/authRepository.js"
+import * as userRepository from "../repositories/userRepository.js"
 
 export async function validateTokenMiddleware(req, res, next) {
   const authorization = req.headers.authorization;
@@ -7,14 +8,12 @@ export async function validateTokenMiddleware(req, res, next) {
     return res.sendStatus(401);
   }
 
-  const { rows: sessions } = await connection.query(`SELECT * FROM sessions WHERE token=$1`, [token]);
-  const [session] = sessions;
+  const session = await authRepository.findByToken(token);
   if (!session) {
     return res.sendStatus(401);
   }
 
-  const { rows: users } = await connection.query(`SELECT * FROM users WHERE id=$1`, [session.userId]);
-  const [user] = users;
+  const user = await userRepository.findById(session.userId);
   if (!user) {
     return res.sendStatus(401);
   }
