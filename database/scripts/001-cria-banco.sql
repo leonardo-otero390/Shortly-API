@@ -16,7 +16,7 @@ CREATE TABLE "urls" (
 	"userId" INTEGER NOT NULL REFERENCES users(id),
 	"url" TEXT NOT NULL,
 	"shorten" varchar(8) NOT NULL,
-	"visitCount" integer NOT NULL,
+	"visitCount" integer NOT NULL DEFAULT 0
 )
 
 
