@@ -1,4 +1,4 @@
-import HttpError from "./HttpError";
+import HttpError from "./HttpError.js";
 
 export default class Conflict extends HttpError {
   constructor(message) {

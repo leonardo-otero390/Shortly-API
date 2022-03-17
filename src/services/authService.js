@@ -13,8 +13,8 @@ export async function insert({ email, password }) {
   if (bcrypt.compareSync(password, user.password)) {
     const token = uuid();
     await authRepository.insert(token, user.id);
-    return res.send(token);
+    return token;
+  } else {
+    throw new Unauthorized("Email e/ou senha incorretos");
   }
-
-  throw new Unauthorized("Email e/ou senha incorretos");
 }
