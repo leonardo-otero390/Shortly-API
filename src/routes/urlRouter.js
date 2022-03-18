@@ -11,4 +11,5 @@ urlRouter.post(
   validateSchemaMiddleware(urlSchema),
   urlController.insert
 );
+urlRouter.get("/:shortUrl", urlController.findByShorten);
 export default urlRouter;

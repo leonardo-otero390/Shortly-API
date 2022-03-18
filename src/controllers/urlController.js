@@ -10,3 +10,18 @@ export async function insert(req, res, next) {
     next(error);
   }
 }
+
+export async function findByShorten(req, res, next) {
+  const shorten = req.params.shortUrl;
+  if(shorten.length !== 8) res.sendStatus(400);
+  try {
+    const result = await urlService.findByShortenAndIncrementVisitCount(
+      shorten
+    );
+    res
+      .status(200)
+      .send({ id: result.id, shortUrl: result.shorten, url: result.url });
+  } catch (error) {
+    next(error);
+  }
+}
