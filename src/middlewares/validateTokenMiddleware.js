@@ -13,7 +13,7 @@ export async function validateTokenMiddleware(req, res, next) {
     return res.sendStatus(401);
   }
 
-  const user = await userRepository.findById(session.userId);
+  const user = await userRepository.find(session.userId);
   if (!user) {
     return res.sendStatus(401);
   }

@@ -54,3 +54,14 @@ export async function remove(id) {
   if (!result.rowCount) return false;
   return true;
 }
+
+export async function listUserUrls(userId){
+  const result = await connection.query(
+    ` SELECT urls.id,"visitCount",url, shorten AS "shortUrl" FROM urls 
+    JOIN users ON urls."userId" = users.id
+    WHERE users.id = $1;`,
+    [userId]
+  );
+  if (!result.rowCount) return null;
+  return result.rows;
+}

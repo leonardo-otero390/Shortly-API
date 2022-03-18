@@ -6,7 +6,7 @@ import serverError from "../middlewares/serverError.js";
 
 const router = Router();
 router.use(authRouter);
-router.use(userRouter);
+router.use("/users", userRouter);
 router.use("/urls", urlRouter);
 router.use(serverError);
 

@@ -8,7 +8,7 @@ export async function findByEmail(email) {
   return result.rows[0];
 }
 
-export async function findById(id) {
+export async function find(id) {
   const result = await connection.query("SELECT * FROM users WHERE id=$1", [
     id,
   ]);
