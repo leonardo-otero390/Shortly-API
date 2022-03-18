@@ -33,3 +33,24 @@ export async function incrementVisitCount(id) {
   if (!result.rowCount) return false;
   return true;
 }
+
+export async function find(id) {
+  const result = await connection.query(
+    ` SELECT * FROM urls WHERE id = $1;`,
+    [id]
+  );
+  if (!result.rowCount) return null;
+  return result.rows[0];
+}
+
+export async function remove(id) {
+  const result = await connection.query(
+    ` 
+  DELETE FROM urls
+  WHERE id = $1
+  `,
+    [id]
+  );
+  if (!result.rowCount) return false;
+  return true;
+}

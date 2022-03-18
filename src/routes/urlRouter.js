@@ -5,11 +5,13 @@ import { validateTokenMiddleware } from "../middlewares/validateTokenMiddleware.
 import urlSchema from "../schemas/urlSchema.js";
 
 const urlRouter = Router();
+urlRouter.get("/:shortUrl", urlController.findByShorten);
+urlRouter.use(validateTokenMiddleware);
 urlRouter.post(
   "/shorten",
   validateTokenMiddleware,
   validateSchemaMiddleware(urlSchema),
   urlController.insert
 );
-urlRouter.get("/:shortUrl", urlController.findByShorten);
+urlRouter.delete("/:id", urlController.remove);
 export default urlRouter;
