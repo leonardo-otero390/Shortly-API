@@ -21,10 +21,22 @@ export async function getUser(req, res, next) {
 
 export async function listUserUrls(req, res, next) {
   const { id } = req.params;
-
+  if (id === "rankings") {
+    await rankUsersByVisitCount(req, res, next);
+    return;
+  }
   try {
     const urls = await userService.findAndListUserUrls(id);
     res.send(urls);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function rankUsersByVisitCount(req, res, next) {
+  try {
+    const users = await userService.rankUsersByVisitCount();
+    res.send(users);
   } catch (error) {
     next(error);
   }

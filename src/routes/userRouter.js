@@ -11,5 +11,7 @@ userRouter.post(
   userController.createUser
 );
 userRouter.get("/", validateTokenMiddleware, userController.getUser);
+userRouter.get("/ranking",userController.rankUsersByVisitCount);
 userRouter.get("/:id", userController.listUserUrls);
+
 export default userRouter;

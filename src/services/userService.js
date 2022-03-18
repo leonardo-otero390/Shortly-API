@@ -33,3 +33,7 @@ export async function findAndListUserUrls(id) {
   };
   return result;
 }
+export async function rankUsersByVisitCount(){
+  const users = await userRepository.rankUsersByVisitCount();
+  return users;
+}
